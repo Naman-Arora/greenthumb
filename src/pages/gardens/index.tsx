@@ -42,9 +42,10 @@ function MapComponent() {
   return (
     <>
       <Head>
-        <title>Map</title>
+        <title>greenthumb | Gardens</title>
       </Head>
       <Drawer
+        shadow="xl"
         opened={opened}
         onClose={close}
         // title="About Garden"
@@ -52,17 +53,39 @@ function MapComponent() {
         overlayProps={{ opacity: 0.1, blur: 0 }}
         scrollAreaComponent={Drawer.NativeScrollArea}
         position="right"
+        size={400}
       >
-        <p className="font-outfit text-2xl font-bold">About Garden</p>
-        {garden?.name}
-        {garden?.location}
+        <h1 className="font-outfit text-2xl font-bold text-center">{garden?.name}</h1>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {garden?.image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            className="m-2 rounded"
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            src={garden?.image}
+            alt={garden?.name}
+            width={350}
+          />
+        )}
+        <p class>{garden?.location}, TX</p>
+        <br />
+        {garden?.content && (
+          <div className="prose prose-sm">
+            <div
+              dangerouslySetInnerHTML={{ __html: garden.content as string }}
+            />
+          </div>
+        )}
+          {garden?.userId && <div className="mt-10 text-blue-600 hover:underline">
+            <Link href={`/profile/${garden?.userId}`}>Garden Owner</Link>
+          </div>}
       </Drawer>
-      <div className="z-40 fixed bottom-6 left-4">
+      <div className="fixed bottom-6 left-4 z-40">
         <Link
           href="/gardens/create"
-          className="inline-flex items-center rounded-lg border-2 border-black bg-white/70 backdrop-blur p-2 text-center text-sm font-medium text-black hover:bg-green-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300"
+          className="inline-flex items-center rounded-lg border-2 border-black bg-white/70 p-2 text-center text-sm font-medium text-black backdrop-blur hover:bg-green-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300"
         >
-          <IconPlus stroke={3}/>
+          <IconPlus stroke={3} />
         </Link>
       </div>
       <div>
@@ -84,7 +107,7 @@ function MapComponent() {
                 return (
                   <MarkerF
                     key={index}
-                    label={item.name}
+                    // label={item.name}
                     position={{ lat: item.latitude, lng: item.longitude }}
                     onClick={() => {
                       console.log("map zoom is", map?.getZoom());
