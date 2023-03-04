@@ -11,7 +11,7 @@ export default function Blog() {
   const post = api.event.findOne.useQuery({ id: idString });
   console.log(post.data);
 
-  const garden = api.garden.findOne.useQuery({id: post.data?.gardenId as string});
+  // const garden = api.garden.findOne.useQuery({id: post.data?.gardenId as string});
   // const url = "../gardens/" + (garden.data?.id as string) ;
   return (
     <>

@@ -1,5 +1,3 @@
-import { type GetServerSidePropsContext } from "next";
-import { getGreenThumbAuthSession } from "~/server/get-server-session";
 import {
   GoogleMap,
   LoadScript,

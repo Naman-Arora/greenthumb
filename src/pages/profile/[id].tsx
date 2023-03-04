@@ -56,6 +56,7 @@ const Profile = () => {
                 </h1>
                 {user.data?.image && (
                   <div className="flex justify-center">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       className="m-4 rounded-2xl font-bold"
                       src={user.data?.image}
