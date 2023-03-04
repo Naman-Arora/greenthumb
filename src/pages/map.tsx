@@ -1,35 +1,63 @@
-import GoogleMapReact from "google-map-react";
+import { type GetServerSidePropsContext } from "next";
+import { getGreenThumbAuthSession } from "~/server/get-server-session";
+import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import { api } from "~/utils/api";
+import NavigationBar from "~/components/NavigationBar";
 
-const AnyReactComponent = ({
-  text,
-  lat,
-  lng,
-}: {
-  text: string;
-  lat: number;
-  lng: number;
-}) => <div>{text}</div>;
+const containerStyle = {
+  width: "100vw",
+  height: "90vh",
+};
 
-export default function Map() {
-  const defaultProps = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627,
-    },
-    zoom: 11,
-  };
+const center = {
+  lat: 30.288,
+  lng: -97.73,
+};
+
+function MyComponent() {
+  const gardens = api.garden.all.useQuery();
 
   return (
-    <>
-      <div style={{ height: "100vh", width: "100%" }}>
-        <GoogleMapReact
-          //   bootstrapURLKeys={{ key: "" }}
-          defaultCenter={defaultProps.center}
-          defaultZoom={defaultProps.zoom}
-        >
-          <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
-        </GoogleMapReact>
-      </div>
-    </>
+    <div>
+      <NavigationBar page="Maps" />
+      <div className="h-[10vh]" />
+      <LoadScript
+        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_KEY as string}
+      >
+        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
+          {/* Child components, such as markers, info windows, etc. */}
+          {gardens.data &&
+            gardens.data.map((item, index) => {
+              return (
+                <MarkerF
+                  key={index}
+                  label={item.name}
+                  position={{ lat: item.latitude, lng: item.longitude }}
+                />
+              );
+            })}
+        </GoogleMap>
+      </LoadScript>
+    </div>
   );
 }
+
+export default MyComponent;
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const session = await getGreenThumbAuthSession(ctx);
+
+  if (!session) {
+    return {
+      redirect: { destination: "/", permanent: false },
+      props: {},
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+};

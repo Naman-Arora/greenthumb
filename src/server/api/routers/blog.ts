@@ -23,15 +23,17 @@ export const blogRouter = createTRPCRouter({
       z.object({
         name: z.string(),
         desc: z.string(),
-      }),
+        content: z.string(),
+      })
     )
-    .query(({ ctx, input }) => {
+    .mutation(({ ctx, input }) => {
       // let a = ctx.auth.userId;
       return ctx.prisma.blog.create({
         data: {
           name: input.name,
           desc: input.desc,
           userId: ctx.session.user.id,
+          content: input.content
         },
       });
     }),

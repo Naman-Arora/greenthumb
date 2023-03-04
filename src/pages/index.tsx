@@ -5,9 +5,12 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
 import NavigationBar from "../components/NavigationBar";
+import Post from "../components/Post";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+
+
+  // const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
   return (
     <>
@@ -46,9 +49,9 @@ const Home: NextPage = () => {
             </Link> */}
           </div>
           <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl text-green-600">
+            {/* <p className="text-2xl text-green-600">
               {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-            </p>
+            </p> */}
             <AuthShowcase />
           </div>
         </div>
@@ -69,27 +72,27 @@ const AuthShowcase: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-green-600">
+      {sessionData && (
+          <SignedInPage />
+        )}
+      {/* <p className="text-center text-2xl text-green-600">
         {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
         {secretMessage && <span> - {secretMessage}</span>}
-      </p>
+      </p> */}
       <button
-        className="rounded-2xl bg-green-600 px-10 py-3 font-semibold text-yellow-300 no-underline transition hover:bg-white/20"
+        className="rounded-2xl bg-green-600 px-10 py-3 font-semibold text-yellow-300 no-underline transition hover:bg-green-800"
         onClick={sessionData ? () => void signOut() : () => void signIn()}
       >
         {sessionData ? "Sign out" : "Sign in"}
-        {sessionData && (
-          <SignedInPage />
-        )}
       </button>
     </div>
   );
 };
 
-const SignedInPage: NextPage = () => {
+const SignedInPage = () => {
   return (
     <>
-      <NavigationBar />
+      <NavigationBar page="Home" />
     </>
   );
 };
