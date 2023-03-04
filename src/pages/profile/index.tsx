@@ -1,7 +1,8 @@
 import Head from "next/head";
 
 import { useSession } from "next-auth/react";
-
+import { type GetServerSidePropsContext } from "next";
+import { getGreenThumbAuthSession } from "~/server/get-server-session";
 import NavigationBar from "~/components/NavigationBar";
 import {
   IconAddressBook,
@@ -92,3 +93,21 @@ const Profile = () => {
 };
 
 export default Profile;
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const session = await getGreenThumbAuthSession(ctx);
+  
+    if (!session) {
+      return {
+        redirect: { destination: "/", permanent: false },
+        props: {},
+      };
+    }
+  
+    return {
+      props: {
+        session,
+      },
+    };
+  };

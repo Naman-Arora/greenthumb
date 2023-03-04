@@ -19,7 +19,7 @@ export default function Blog() {
       <NavigationBar page="Events" />
       <div className="h-[10vh]" />
       <div className="grid place-items-center py-10">
-        <h1> {post.data?.name}</h1>
+        <h1 className="font-bold font-outfit"> {post.data?.name}</h1>
         {post.data ? (
           <div className="prose prose-lg">
             {post.data?.content && (
@@ -29,8 +29,6 @@ export default function Blog() {
               }}
               />
               )}
-              <h2> Garden: {garden.data?.name} </h2>
-              
           </div>
         ) : (
           <div>

@@ -9,7 +9,7 @@ export const blogRouter = createTRPCRouter({
   all: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.blog.findMany();
   }),
-  findOne: protectedProcedure
+  findOne: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
       return ctx.prisma.blog.findFirst({

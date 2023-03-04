@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 import NavigationBar from "../components/NavigationBar";
+// import { IconCaretDown } from "@tabler/icons-react";
 
 const Home: NextPage = () => {
   return (
@@ -11,6 +12,7 @@ const Home: NextPage = () => {
         <meta name="description" content="Find Gardens Near You" />
         <link rel="shortcut icon" href="/leafs.ico" />
       </Head>
+      <NavigationBar page="Home" />
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-yellow-200 to-yellow-400">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <h1 className="font-outfit text-5xl font-extrabold tracking-normal text-green-600 sm:text-[5rem]">
@@ -33,7 +35,7 @@ const AuthShowcase: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      {sessionData && <NavigationBar page="Home" />}
+      {/* {sessionData && <NavigationBar page="Home" />} */}
       <button
         className="rounded-2xl bg-green-600 px-10 py-3 font-semibold text-yellow-300 no-underline transition hover:bg-green-800"
         onClick={sessionData ? () => void signOut() : () => void signIn()}

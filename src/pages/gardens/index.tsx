@@ -55,30 +55,39 @@ function MapComponent() {
         position="right"
         size={400}
       >
-        <h1 className="font-outfit text-2xl font-bold text-center">{garden?.name}</h1>
+        <h1 className="text-center font-outfit text-2xl font-bold">
+          {garden?.name}
+        </h1>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         {garden?.image && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            className="m-2 rounded"
+            className="m-2 rounded object-cover"
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             src={garden?.image}
             alt={garden?.name}
             width={350}
+            height={250}
           />
         )}
-        <p className="font-bold text-center">{garden?.location}, TX</p>
+        <p className="text-center font-outfit font-bold">
+          {garden?.location}, TX
+        </p>
         <br />
         {garden?.content && (
-          <div className="prose prose-sm">
+          <div className="prose prose-sm font-outfit">
             <div
               dangerouslySetInnerHTML={{ __html: garden.content as string }}
             />
           </div>
         )}
-          {garden?.userId && <div className="mt-10 text-blue-600 hover:underline">
-            <Link href={`/profile/${garden?.userId}`}>Garden Owner</Link>
-          </div>}
+        {garden?.userId && (
+          <div className="mt-10 text-blue-600 hover:underline">
+            <Link href={`/profile/${garden?.userId}`}>
+              <p className="text-center">Garden Owner</p>
+            </Link>
+          </div>
+        )}
       </Drawer>
       <div className="fixed bottom-6 left-4 z-40">
         <Link
@@ -127,20 +136,20 @@ function MapComponent() {
 
 export default MapComponent;
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const session = await getGreenThumbAuthSession(ctx);
+// export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+//   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+//   const session = await getGreenThumbAuthSession(ctx);
 
-  if (!session) {
-    return {
-      redirect: { destination: "/", permanent: false },
-      props: {},
-    };
-  }
+//   if (!session) {
+//     return {
+//       redirect: { destination: "/", permanent: false },
+//       props: {},
+//     };
+//   }
 
-  return {
-    props: {
-      session,
-    },
-  };
-};
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// };
