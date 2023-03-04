@@ -8,6 +8,7 @@ import { createEmotionCache, MantineProvider } from "@mantine/core";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
+import { Notifications } from "@mantine/notifications";
 
 const myCache = createEmotionCache({
   key: 'mantine',
@@ -25,6 +26,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <link rel="shortcut icon" type="image/png" href="/src/pages/leaf.png" />
       </Head>
       <SessionProvider session={session}>
         <MantineProvider
@@ -36,6 +38,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
             colorScheme: "light",
           }}
         >
+           <Notifications />
           <Component {...pageProps} />
         </MantineProvider>
       </SessionProvider>
