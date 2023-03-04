@@ -3,7 +3,7 @@ import Link from "next/link";
 type Props = {
   title: string;
   date: Date;
-  description: string;
+  description: string | null;
   route: string;
 };
 
@@ -40,15 +40,15 @@ const Event = (props: Props) => {
 
   return (
     <Link href={`/events/${props.route}`}>
-      <div className="w-[40.125rem] rounded-2xl border border-black bg-white pt-4 shadow-lg hover:bg-slate-100 transition-all duration-300">
-        <div className="px-4 inline-flex">
+      <div className="w-[40.125rem] rounded-2xl border border-black bg-white pt-4 shadow-lg transition-all duration-300 hover:bg-slate-100">
+        <div className="inline-flex px-4">
           <h2 className="mb-4 text-left font-outfit font-bold">
             {props.title}&nbsp;
           </h2>
           <h3 className="text-left">{"| " + formatDate(props.date)}</h3>
           <br></br>
         </div>
-        <p className="px-4">{props.description}</p>
+        {props.description && <p className="px-4">{props.description}</p>}
         <br></br>
       </div>
     </Link>

@@ -75,7 +75,8 @@ function MapComponent() {
         {garden?.content && (
           <div className="prose prose-sm font-outfit">
             <div
-              dangerouslySetInnerHTML={{ __html: garden.content as string }}
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              dangerouslySetInnerHTML={{ __html: garden.content }}
             />
           </div>
         )}
