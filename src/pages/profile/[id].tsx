@@ -23,17 +23,17 @@ const Profile = () => {
       <div className="grid-cols-3 place-items-center">
         <div className="grid place-items-center">
           <div className="my-[10vh] h-[70vh] w-[70vw]">
-            <div className="block h-[70vh] max-w-[70vw] rounded-lg border border-gray-200 bg-white p-6 shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-              <div className="border-b border-gray-200 dark:border-gray-700">
-                <ul className="-mb-px flex flex-wrap text-center text-sm font-medium text-gray-500 dark:text-gray-400">
+            <div className="block h-[70vh] max-w-[70vw] rounded-lg border border-gray-200 bg-white p-6 shadow hover:bg-gray-100">
+              <div className="border-b border-gray-200 ">
+                <ul className="-mb-px flex flex-wrap text-center text-sm font-medium text-gray-500">
                   <li className="mr-2">
                     <a
                       href="#"
-                      className="active group inline-flex rounded-t-lg border-b-2 border-blue-600 p-4 text-blue-600 dark:border-blue-500 dark:text-blue-500"
+                      className="active group inline-flex rounded-t-lg border-b-2 border-blue-600 p-4 text-blue-600"
                     >
                       <svg
                         aria-hidden="true"
-                        className="mr-2 h-5 w-5 text-blue-600 dark:text-blue-500"
+                        className="mr-2 h-5 w-5 text-blue-600"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"

@@ -19,7 +19,11 @@ export default function Blog() {
       <NavigationBar page="Events" />
       <div className="h-[10vh]" />
       <div className="grid place-items-center py-10">
-        <h1 className="font-outfit font-bold"> {post.data?.name}</h1>
+        <h1 className="font-outfit font-bold">{post.data?.name}&nbsp;</h1>
+        <p className="text-2xl font-semibold">
+          {post.data?.gardenId &&
+            api.garden.findOne.useQuery({ id: post.data.gardenId }).data?.name}
+        </p>
         {post.data ? (
           <div className="prose prose-lg">
             {post.data?.content && (

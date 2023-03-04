@@ -24,13 +24,13 @@ const Profile = () => {
       <div className="grid-cols-3 place-items-center">
         <div className="grid place-items-center">
           <div className="my-[10vh] w-[70vw]">
-            <div className="block max-w-[70vw] rounded-3xl border border-gray-200 bg-white p-6 shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-              <div className="border-b border-gray-200 dark:border-gray-700">
-                <ul className="-mb-px flex flex-wrap text-center text-sm font-medium text-gray-500 dark:text-gray-400">
+            <div className="block max-w-[70vw] rounded-3xl border border-gray-200 bg-white p-6 shadow hover:bg-gray-100">
+              <div className="border-b border-gray-200">
+                <ul className="-mb-px flex flex-wrap text-center text-sm font-medium text-gray-500">
                   <li className="mr-2">
                     <a
                       href="#"
-                      className="active group inline-flex rounded-t-lg border-b-2 border-blue-600 p-4 text-blue-600 dark:border-blue-500 dark:text-blue-500"
+                      className="active group inline-flex rounded-t-lg border-b-2 border-blue-600 p-4 text-blue-600"
                     >
                       <IconUserCircle size={20} className="mr-2" />
                       Profile
@@ -39,7 +39,7 @@ const Profile = () => {
                   <li className="mr-2">
                     <a
                       href="#"
-                      className="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
+                      className="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600"
                     >
                       <IconAdjustments size={20} className="mr-2" />
                       Settings
@@ -48,7 +48,7 @@ const Profile = () => {
                   <li className="mr-2">
                     <a
                       href="#"
-                      className="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
+                      className="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600"
                     >
                       <IconAddressBook size={20} className="mr-2" />
                       Contacts
