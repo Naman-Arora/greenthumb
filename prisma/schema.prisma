@@ -74,15 +74,19 @@ model Garden {
     longitude Float
     latitude  Float
     name      String
+    content   String?  @db.Text
     user      User?    @relation(fields: [userId], references: [id])
     userId    String?
     Events    Events[]
+    image       String?
 }
 
 model Events {
     id       String   @id @unique @default(cuid())
     name     String
     time     DateTime
+    content  String   @db.Text
+    desc     String?
     user     User?    @relation(fields: [userId], references: [id])
     garden   Garden   @relation(fields: [gardenId], references: [id])
     userId   String?

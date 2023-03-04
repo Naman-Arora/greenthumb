@@ -22,6 +22,8 @@ export const gardenRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string(),
+        content: z.string(),
+        location: z.string(),
         latitude: z.number(),
         longitude: z.number(),
       }),
@@ -31,6 +33,8 @@ export const gardenRouter = createTRPCRouter({
       return ctx.prisma.garden.create({
         data: {
           name: input.name,
+          content: input.content,
+          location: input.location,
           latitude: input.latitude,
           longitude: input.longitude,
         },

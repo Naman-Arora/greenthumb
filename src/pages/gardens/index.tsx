@@ -67,7 +67,7 @@ function MapComponent() {
             width={350}
           />
         )}
-        <p class>{garden?.location}, TX</p>
+        <p className="font-bold text-center">{garden?.location}, TX</p>
         <br />
         {garden?.content && (
           <div className="prose prose-sm">

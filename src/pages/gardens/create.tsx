@@ -11,15 +11,18 @@ import { useState } from "react";
 import Head from "next/head";
 import { notifications } from "@mantine/notifications";
 import { IconAlertTriangle, IconCheck } from "@tabler/icons-react";
+// import { DatePickerInput } from "@mantine/dates";
 import NavigationBar from "~/components/NavigationBar";
 
 const content =
   '<h2 style="text-align: center;">Welcome to Mantine rich text editor</h2><p><code>RichTextEditor</code> component focuses on usability and is designed to be as simple as possible to bring a familiar editing experience to regular users. <code>RichTextEditor</code> is based on <a href="https://tiptap.dev/" rel="noopener noreferrer" target="_blank">Tiptap.dev</a> and supports all of its features:</p><ul><li>General text formatting: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <s>strike-through</s> </li><li>Headings (h1-h6)</li><li>Sub and super scripts (<sup>&lt;sup /&gt;</sup> and <sub>&lt;sub /&gt;</sub> tags)</li><li>Ordered and bullet lists</li><li>Text align&nbsp;</li><li>And all <a href="https://tiptap.dev/extensions" target="_blank" rel="noopener noreferrer">other extensions</a></li></ul>';
 
-export default function Create() {
-  const mutation = api.blog.create.useMutation();
+export default function CreateGarden() {
+  const mutation = api.garden.create.useMutation();
   const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const [lat, setLat] = useState("");
+  const [long, setLong] = useState("");
+  // const [value, setValue] = useState<Date | null>(null);
 
   const editor = useEditor({
     extensions: [
@@ -36,18 +39,18 @@ export default function Create() {
   return (
     <>
       <Head>
-        <title>greenthumb | Create Post</title>
+        <title>greenthumb | Create Garden</title>
       </Head>
-      <div className="z-[-10] w-[100vw] h-[100vh] fixed bg-gradient-to-b from-yellow-200 to-yellow-400"/>
-      <NavigationBar page="Blog" />
+      <div className="z-[-10] w-[100vw] h-[100vh] fixed bg-gradient-to-b from-yellow-200 to-yellow-400" />
+      <NavigationBar page="Gardens" />
       <div className="h-[10vh]" />
       <div className="grid place-items-center py-10 px-20">
-        <h1 className="mb-10 text-center text-6xl font-bold">
-          Create a New Post
+        <h1 className="mb-10 text-center text-6xl font-bold font-outfit">
+          Create a New Garden
         </h1>
         <div className="my-6">
           <label className="mb-2 block text-base font-medium text-gray-900">
-            Post Title
+            Garden Name
           </label>
           <input
             type="text"
@@ -57,16 +60,28 @@ export default function Create() {
             onChange={(e) => setTitle(e.currentTarget.value)}
           />
         </div>
-        <div className="mb-10">
+        <div className="mb-6">
           <label className="mb-2 block text-base font-medium text-gray-900">
-            Post Description
+            Garden Latitude
           </label>
           <input
-            type="text"
+            type="number"
             className="block w-[40rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             required
-            value={desc}
-            onChange={(e) => setDesc(e.currentTarget.value)}
+            value={lat}
+            onChange={(e) => setLat(e.currentTarget.value)}
+          />
+        </div>
+        <div className="mb-6">
+          <label className="mb-2 block text-base font-medium text-gray-900">
+            Garden Longitude
+          </label>
+          <input
+            type="number"
+            className="block w-[40rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+            required
+            value={long}
+            onChange={(e) => setLong(e.currentTarget.value)}
           />
         </div>
         <RichTextEditor editor={editor} className="mx-20">
@@ -113,26 +128,26 @@ export default function Create() {
         <button
           className="mt-10 rounded-lg border border-gray-300 bg-white px-6 py-3 text-xl font-bold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200"
           onClick={() => {
-            if (title !== "" && desc !== "" && editor?.getHTML() !== "") {
+            if (title !== "" && lat !== "" && long !== "" && editor?.getHTML() !== "") {
               notifications.show({
                 id: "load-data",
                 loading: true,
-                title: "Uploading Post",
-                message: "Your post is being uploaded",
+                message: "Creating Garden",
                 autoClose: false,
                 withCloseButton: false,
               });
               mutation.mutate({
                 name: title,
-                desc: desc,
+                location: "Austin",
+                latitude: parseFloat(lat),
+                longitude: parseFloat(long),
                 content: editor?.getHTML() as string,
               });
               if (mutation.isSuccess) {
                 notifications.update({
                   id: "load-data",
                   color: "green",
-                  title: "Successfully Upload Post",
-                  message: "Post was successfully uploaded!",
+                  message: "Garden was successfully created!",
                   icon: <IconCheck size="1rem" />,
                   autoClose: 2000,
                 });
@@ -140,7 +155,7 @@ export default function Create() {
                 notifications.update({
                   id: "load-data",
                   color: "red",
-                  title: "Failed to upload post",
+                  title: "Failed to create garden.",
                   message: "Please try again",
                   icon: <IconAlertTriangle size="1rem" />,
                   autoClose: 2000,
@@ -156,7 +171,7 @@ export default function Create() {
             }
           }}
         >
-          Post
+          Create Event
         </button>
       </div>
     </>

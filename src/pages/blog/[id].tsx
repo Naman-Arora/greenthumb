@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 // import { trpc } from "../../utils/trpc";
 import { api } from "~/utils/api";
+import NavigationBar from "~/components/NavigationBar";
 
 export default function Blog() {
   const router = useRouter();
@@ -11,6 +12,9 @@ export default function Blog() {
 
   return (
     <>
+      <NavigationBar page="Blog"/>
+      <div className="z-[-10] w-[100vw] h-[100vh] fixed bg-gradient-to-b from-yellow-200 to-yellow-400" />
+      <div className="h-[10vh]" />
       <div className="grid place-items-center py-10">
         {post.data ? (
           <div className="prose prose-lg">
@@ -29,6 +33,7 @@ export default function Blog() {
           </div>
         )}
       </div>
+      {/* </div> */}
     </>
   );
 }

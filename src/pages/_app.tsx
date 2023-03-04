@@ -26,7 +26,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <link rel="shortcut icon" type="image/png" href="/src/pages/leaf.png" />
+        <link rel="shortcut icon" href="/leafs.ico" />
       </Head>
       <SessionProvider session={session}>
         <MantineProvider

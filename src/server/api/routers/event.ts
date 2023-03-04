@@ -23,7 +23,9 @@ export const eventRouter = createTRPCRouter({
       z.object({
         name: z.string(),
         time: z.date(),
+        desc: z.string(),
         gardenId: z.string(),
+        content: z.string(),
       }),
     )
     .mutation(({ ctx, input }) => {
@@ -31,7 +33,9 @@ export const eventRouter = createTRPCRouter({
         data: {
           name: input.name,
           time: input.time,
+          desc: input.desc,
           gardenId: input.gardenId,
+          content: input.content,
           userId: ctx.session.user.id,
         },
       });
