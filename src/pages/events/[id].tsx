@@ -11,7 +11,9 @@ export default function Blog() {
   const post = api.event.findOne.useQuery({ id: idString });
   console.log(post.data);
 
-  // const garden = api.garden.findOne.useQuery({id: post.data?.gardenId as string});
+  const garden = api.garden.findOne.useQuery({
+    id: post.data?.gardenId as string,
+  });
   // const url = "../gardens/" + (garden.data?.id as string) ;
   return (
     <>
@@ -21,8 +23,7 @@ export default function Blog() {
       <div className="grid place-items-center py-10">
         <h1 className="font-outfit font-bold">{post.data?.name}&nbsp;</h1>
         <p className="text-2xl font-semibold">
-          {post.data?.gardenId &&
-            api.garden.findOne.useQuery({ id: post.data.gardenId }).data?.name}
+          {garden.data?.name}
         </p>
         {post.data ? (
           <div className="prose prose-lg">
